@@ -2,6 +2,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import PokemonLoader from './PokemonLoader';
 import styles from '../styles/GeneralList.module.scss';
 import { getPokemonListInfiniteScroll } from "./hooks/PokemonListInfiniteScroll";
+import PokemonCard from "./PokemonCard";
 
 export default function GeneralList() {
     const { pokemonsList, isLoading, hasNextPage, fetchNextPage } = getPokemonListInfiniteScroll();
@@ -24,12 +25,7 @@ export default function GeneralList() {
                     <div className="row">
                         {pokemonsList.map((item) => (
                             <div className={`col-3 ${styles.cardWrapper}`} key={item.name}>
-                                <div className="card" >
-                                    <img src={item.main_avatar} className="card-img-top" alt="..." />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{item.name}</h5>
-                                    </div>
-                                </div>
+                                <PokemonCard item={item} />
                             </div>
                         ))}
                     </div>

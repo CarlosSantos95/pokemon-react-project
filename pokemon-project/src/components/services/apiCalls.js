@@ -19,9 +19,9 @@ export const getPokemonListOffset = (page, limit) => (dispatch) => {
                 let finalResult = result;
                 for (let i = 0; i < result.length; i++) {
                     const pokemon = result[i];
-                    const { sprites } = await getPokemonData(pokemon.name)
+                    const { sprites, types, order } = await getPokemonData(pokemon.name)
                     const main_avatar = sprites.other['official-artwork'].front_default;
-                    finalResult[i] = { ...finalResult[i], main_avatar }
+                    finalResult[i] = { ...finalResult[i], main_avatar, types, order }
                     // finalResult[i] = { ...pokemonData }
                 }
                 dispatch(setCharactersList(finalResult));
