@@ -1,4 +1,3 @@
-import React from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PokemonLoader from './PokemonLoader';
 import styles from '../styles/GeneralList.module.scss';
