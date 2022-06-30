@@ -1,0 +1,31 @@
+.topCardWrapper {
+    position: relative;
+
+    .pokemonBg {
+        background-color: #bfbfbf9c;
+    }
+
+    .imageOverlay {
+        position: absolute;
+        height: 10%;
+        padding: 5px 0 0 5px;
+        top: 0%;
+        font-weight: 500;
+    }
+}
+
+.pokemonCardBody {
+    padding: 5px;
+
+    .pokemonName {
+        margin: 0;
+    }
+
+    .typeBadge {
+        padding: 5px;
+        margin: 3px;
+        font-weight: 400;
+        border-radius: 3px;
+        width: 25%;
+    }
+}

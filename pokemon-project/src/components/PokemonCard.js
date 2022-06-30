@@ -1,16 +1,32 @@
-import { getTypeColor } from '../utils/basicFunctions';
+import { getTypeColor, firstCharUpperCase } from '../utils/basicFunctions';
+import styles from '../styles/PokemonCard.module.scss';
+const getFormatedOrder = (number) => {
+    if (number <= 9999) {
+        number = ("000" + number).slice(-3);
+    }
+    return `N.º${number}`;
+}
 
 export default function GeneralList({ item }) {
+    const { name, order, types, main_avatar } = item;
     return (
         <div className="card" >
-            <img src={item.main_avatar} className="card-img-top" alt="..." />
-            <div className="card-body">
-                <span className="card-title">{item.order}</span>
-                <h5 className="card-title">{item.name}</h5>
+            <div className={styles.topCardWrapper}>
+                <img src={main_avatar} className={`card-img-top ${styles.pokemonBg}`} alt="..." />
+                <div className={`${styles.imageOverlay}`}>
+                    <span className="card-title">{getFormatedOrder(order)}</span>
+                </div>
+
+            </div>
+            <div className={styles.pokemonCardBody}>
+                <h5 className={styles.pokemonName}>{firstCharUpperCase(name)}</h5>
                 <div>
-                    {item.types.map((element) => (
-                        <span key={element.type.name} className={`badge`} style={{backgroundColor: getTypeColor(element.type.name)}}>
-                            {element.type.name}
+                    {types.map((element) => (
+                        <span key={element.type.name}
+                            className={`badge ${styles.typeBadge}`}
+                            style={{ backgroundColor: getTypeColor(element.type.name) }}
+                        >
+                            {firstCharUpperCase(element.type.name)}
                         </span>
                     ))}
                 </div>

@@ -41,3 +41,8 @@ export function getTypeColor(type) {
             break;
     }
 }
+
+export function firstCharUpperCase(element) {
+    const finalResult = element.charAt(0).toUpperCase() + element.slice(1);
+    return finalResult
+}
