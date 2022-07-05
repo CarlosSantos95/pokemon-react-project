@@ -1,14 +1,8 @@
-import { getTypeColor, firstCharUpperCase } from '../utils/basicFunctions';
+import { getTypeColor, firstCharUpperCase, getFormatedOrder } from '../utils/basicFunctions';
 import styles from '../styles/PokemonCard.module.scss';
-const getFormatedOrder = (number) => {
-    if (number <= 9999) {
-        number = ("000" + number).slice(-3);
-    }
-    return `N.º${number}`;
-}
 
-export default function GeneralList({ item }) {
-    const { name, order, types, main_avatar } = item;
+const PokemonCard = ({ pokemon }) => {
+    const { name, order, types, main_avatar } = pokemon;
     return (
         <div className="card" >
             <div className={styles.topCardWrapper}>
@@ -34,3 +28,4 @@ export default function GeneralList({ item }) {
         </div>
     )
 }
+export default PokemonCard

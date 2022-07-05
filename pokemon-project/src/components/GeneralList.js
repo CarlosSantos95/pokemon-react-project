@@ -1,11 +1,23 @@
+import { useNavigate } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import PokemonLoader from './PokemonLoader';
-import styles from '../styles/GeneralList.module.scss';
 import { getPokemonListInfiniteScroll } from "./hooks/PokemonListInfiniteScroll";
 import PokemonCard from "./PokemonCard";
+import PokemonLoader from './PokemonLoader';
+import styles from '../styles/GeneralList.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPokemon } from '../store/slices/pokemons'
+import { getSpecificPokemonData } from './services/apiCalls';
 
-export default function GeneralList() {
-    const { pokemonsList, isLoading, hasNextPage, fetchNextPage } = getPokemonListInfiniteScroll();
+const GeneralList = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isLoading, hasNextPage, fetchNextPage } = getPokemonListInfiniteScroll();
+    const { pokemonsList } = useSelector(state => state.pokemons);
+    const goToPokemonInfo = async (name) => {
+        await dispatch(getSpecificPokemonData(name)).then(() => {
+            navigate(`/pokemoninfo/${name}`);
+        })
+    }
     if (isLoading) {
         return (
             <PokemonLoader />
@@ -13,24 +25,27 @@ export default function GeneralList() {
     }
     return (
         <section>
-            <div className="container">
-                <h1>POKEMON LIST VIEW</h1>
-                <InfiniteScroll
-                    className={styles.infiteScroll}
-                    dataLength={pokemonsList.length}
-                    next={() => fetchNextPage()}
-                    hasMore={hasNextPage}
-                    loader={<PokemonLoader />}
-                >
-                    <div className="row">
-                        {pokemonsList.map((item) => (
-                            <div className={`col-3 ${styles.cardWrapper}`} key={item.name}>
-                                <PokemonCard item={item} />
-                            </div>
-                        ))}
-                    </div>
-                </InfiniteScroll>
-            </div>
+            <InfiniteScroll
+                className={styles.infiteScroll}
+                dataLength={pokemonsList.length}
+                next={() => fetchNextPage()}
+                hasMore={hasNextPage}
+                loader={<PokemonLoader />}
+            >
+                <div className="row">
+                    {pokemonsList.map((item) => (
+                        <div
+                            key={item.name}
+                            className={`col-3 ${styles.cardWrapper}`}
+                            onClick={() => goToPokemonInfo(item.name)}
+                        >
+                            <PokemonCard pokemon={item} />
+                        </div>
+                    ))}
+                </div>
+            </InfiniteScroll>
         </section >
     )
 }
+
+export default GeneralList

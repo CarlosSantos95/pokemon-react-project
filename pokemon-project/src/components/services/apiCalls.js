@@ -1,4 +1,4 @@
-import { setCharactersList, loadMorePokemonList } from '../../store/slices/pokemons';
+import { setCharactersList, loadMorePokemonList, setCurrentPokemon } from '../../store/slices/pokemons';
 // TODO catch response errors
 // basic function to get a specific api call with a custom param
 function getUrlAPI(param) {
@@ -33,8 +33,15 @@ export const getPokemonListOffset = (page, limit) => (dispatch) => {
             return error;
         })
 }
-async function getPokemonData(pokemon) {
-    const url = getUrlAPI(`pokemon/${pokemon}`);
+
+export const getSpecificPokemonData = (name) => async (dispatch) => {
+    await getPokemonData(name).then((result) => {
+        dispatch(setCurrentPokemon(result));
+    })
+}
+
+async function getPokemonData(name) {
+    const url = getUrlAPI(`pokemon/${name}`);
     return fetch(url)
         .then(res => res.json())
         .then(async response => {
