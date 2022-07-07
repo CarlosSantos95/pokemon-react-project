@@ -5,19 +5,18 @@ import PokemonCard from "./PokemonCard";
 import PokemonLoader from './PokemonLoader';
 import styles from '../styles/GeneralList.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPokemon } from '../store/slices/pokemons'
 import { getSpecificPokemonData } from './services/apiCalls';
 
 const GeneralList = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { isLoading, hasNextPage, fetchNextPage } = getPokemonListInfiniteScroll();
-    const { pokemonsList } = useSelector(state => state.pokemons);
     const goToPokemonInfo = async (name) => {
         await dispatch(getSpecificPokemonData(name)).then(() => {
             navigate(`/pokemoninfo/${name}`);
         })
     }
+    const {  isLoading, hasNextPage, fetchNextPage } = getPokemonListInfiniteScroll();
+    const { pokemonsList } = useSelector(state => state.pokemons);
     if (isLoading) {
         return (
             <PokemonLoader />

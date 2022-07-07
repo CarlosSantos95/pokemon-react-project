@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { getPokemonListOffset } from '../services/apiCalls';
-
 export function getPokemonListInfiniteScroll() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const dispatch = useDispatch();
@@ -22,7 +21,8 @@ export function getPokemonListInfiniteScroll() {
 
     const pokemonsList =
         result.data?.pages.reduce(
-            (prevPokemons, page) => prevPokemons.concat(page),
+            (prevPokemons, page) =>
+                prevPokemons?.concat(page),
             []
         ) ?? [];
     return { ...result, pokemonsList }

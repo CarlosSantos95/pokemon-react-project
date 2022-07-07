@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 export const pokemonsSlice = createSlice({
     name: 'pokemons',
     initialState: {
@@ -11,8 +11,9 @@ export const pokemonsSlice = createSlice({
         // function to set the characters into the store and change the loader value
         setCharactersList: (state, action) => {
             // state.dataLoaded = action.payload.length === 0 ? false : true;
-            // console.log('action.payload', action.payload, )
-            state.pokemonsList = state.pokemonsList.concat(action.payload);
+            const responseName = action.payload[0].name;
+            const exists = state.pokemonsList.find(element => element.name === responseName);
+            if (!exists) state.pokemonsList = state.pokemonsList.concat(action.payload);
         },
         loadMorePokemonList: (state, action) => {
             state.loadMorePokemonList = action;
