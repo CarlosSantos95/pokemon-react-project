@@ -13,14 +13,12 @@ const GeneralList = () => {
     const goToPokemonInfo = async (name) => {
         await dispatch(getSpecificPokemonData(name)).then(() => {
             navigate(`/pokemoninfo/${name}`);
-        })
+        });
     }
-    const {  isLoading, hasNextPage, fetchNextPage } = getPokemonListInfiniteScroll();
+    const { isLoading, hasNextPage, fetchNextPage } = getPokemonListInfiniteScroll();
     const { pokemonsList } = useSelector(state => state.pokemons);
     if (isLoading) {
-        return (
-            <PokemonLoader />
-        )
+        return ( <PokemonLoader /> )
     }
     return (
         <section>
@@ -47,4 +45,4 @@ const GeneralList = () => {
     )
 }
 
-export default GeneralList
+export default GeneralList;

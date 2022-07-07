@@ -1,6 +1,6 @@
 
 // import { useLocation } from "react-router-dom";
-import PokemonCard from "./PokemonCard";
+// import PokemonCard from "./PokemonCard";
 import { useSelector } from 'react-redux';
 import PokemonLoader from './PokemonLoader';
 import { useEffect } from "react";
@@ -22,7 +22,7 @@ const PokemonInfo = () => {
             <div className="card" >
                 <button onClick={() => goBack()}>back</button>
                 <h1>{currentPokemon.name}</h1>
-                <PokemonCard pokemon={currentPokemon} />
+                {/* <PokemonCard pokemon={currentPokemon} /> */}
             </div>
         )
     }

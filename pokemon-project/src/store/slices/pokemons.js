@@ -32,7 +32,11 @@ export const pokemonsSlice = createSlice({
         setCurrentPokemon: (state, action) => {
             const currentIndex = state.pokemonsList.findIndex(e => e.name === action.payload.name);
             let pokemon = state.pokemonsList.filter((pokemon) => pokemon.name === action.payload.name);
-            if (pokemon) state.currentPokemon = state.pokemonsList[currentIndex];
+            if (pokemon) {
+                pokemon = { ...action.payload }
+                state.currentPokemon = pokemon;
+                state.pokemonsList[currentIndex] = {...state.pokemonsList[currentIndex],...pokemon};
+            }
         },
         // reset the current user
         resetPokemonsList: (state, action) => {

@@ -2,11 +2,11 @@ import { getTypeColor, firstCharUpperCase, getFormatedOrder } from '../utils/bas
 import styles from '../styles/PokemonCard.module.scss';
 
 const PokemonCard = ({ pokemon }) => {
-    const { name, order, types, main_avatar } = pokemon;
+    const { name, order, types, sprites } = pokemon;
     return (
         <div className="card" >
             <div className={styles.topCardWrapper}>
-                <img src={main_avatar} className={`card-img-top ${styles.pokemonBg}`} alt="..." />
+                <img src={sprites.other['official-artwork'].front_default} className={`card-img-top ${styles.pokemonBg}`} alt="..." />
                 <div className={`${styles.imageOverlay}`}>
                     <span className="card-title">{getFormatedOrder(order)}</span>
                 </div>
