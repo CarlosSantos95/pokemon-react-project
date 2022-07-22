@@ -6,7 +6,11 @@ const PokemonCard = ({ pokemon }) => {
     return (
         <div className="card" >
             <div className={styles.topCardWrapper}>
-                <img src={sprites.other['official-artwork'].front_default} className={`card-img-top ${styles.pokemonBg}`} alt="..." />
+                <img
+                    src={sprites.other['official-artwork'].front_default}
+                    className={`card-img-top ${styles.pokemonBg}`}
+                    alt="..."
+                />
                 <div className={`${styles.imageOverlay}`}>
                     <span className="card-title">{getFormatedOrder(order)}</span>
                 </div>
