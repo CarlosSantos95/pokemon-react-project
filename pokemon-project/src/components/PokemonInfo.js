@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import PokemonLoader from './PokemonLoader';
+import PokemonTypesContainer from './PokemonTypesContainer';
 // import { useNavigate } from 'react-router-dom';
 import styles from '../styles/PokemonInfo.module.scss';
 import { getTypeColor, firstCharUpperCase } from '../utils/basicFunctions';
@@ -63,29 +64,11 @@ const PokemonInfo = () => {
                             </div>
                             <div>
                                 <span>TIPO</span>
-                                <div>
-                                    {currentPokemon.types.map((element) => (
-                                        <span key={element.type.name}
-                                            className={`badge ${styles.typeBadge}`}
-                                            style={{ backgroundColor: getTypeColor(element.type.name) }}
-                                        >
-                                            {firstCharUpperCase(element.type.name)}
-                                        </span>
-                                    ))}
-                                </div>
+                                <PokemonTypesContainer types={currentPokemon.types} />
                             </div>
                             <div>
                                 <span>TIPO</span>
-                                <div>
-                                    {currentPokemon.types.map((element) => (
-                                        <span key={element.type.name}
-                                            className={`badge ${styles.typeBadge}`}
-                                            style={{ backgroundColor: getTypeColor(element.type.name) }}
-                                        >
-                                            {firstCharUpperCase(element.type.name)}
-                                        </span>
-                                    ))}
-                                </div>
+                                <PokemonTypesContainer types={currentPokemon.weaknessTypes} />
                             </div>
                         </div>
                     </div>
