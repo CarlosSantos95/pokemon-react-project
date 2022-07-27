@@ -35,9 +35,44 @@ export const getPokemonListOffset = (page, limit) => (dispatch) => {
 }
 
 export const getSpecificPokemonData = (name) => async (dispatch) => {
-    await getPokemonData(name).then((result) => {
-        dispatch(setCurrentPokemon(result));
-    })
+    let finalData = {};
+    await getPokemonData(name).then(async (specificPokemonDataResult) => {
+        const weaknessTypes = await getAllWeaknessTypes(specificPokemonDataResult.types).then(async (typesResult) => {
+            return typesResult;
+        }).catch(error => {
+            console.log('ERROR', error)
+            return error;
+        });
+        finalData = { ...specificPokemonDataResult, weaknessTypes };
+    });
+    dispatch(setCurrentPokemon(finalData));
+}
+
+async function getAllWeaknessTypes(array) {
+    let weaknessArray = [];
+    await Promise.all(array.map(async (element) => {
+        await getPokemonWeakness(element.type.url).then(async (result) => {
+            weaknessArray = [...weaknessArray, ...result];
+        }).catch(error => {
+            console.log('ERROR', error)
+            return error;
+        });
+    }));
+    return weaknessArray;
+}
+
+async function getPokemonWeakness(url) {
+    return fetch(url)
+        .then(res => res.json())
+        .then(async response => {
+            const result = response;
+            const { double_damage_from } = result.damage_relations;
+            return double_damage_from;
+        })
+        .catch(error => {
+            console.log('ERROR', error)
+            return error;
+        })
 }
 
 async function getPokemonData(name) {

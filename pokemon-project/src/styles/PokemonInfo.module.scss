@@ -1,0 +1,22 @@
+.pokemonInfoWrapper {
+    width: 80%;
+    margin: auto;
+    .pokemonBg {
+        background-color: #bfbfbf9c;
+    }
+    .pokemonImgWrapper {
+        margin: auto;
+        width: 80%;
+    }
+
+    .displayGrid {
+        display: grid;
+    }
+    .statsWrapper {
+        background-color: #30a7d7;
+        border-radius: 10px;
+        padding: 10px;
+    }
+}
+
+
