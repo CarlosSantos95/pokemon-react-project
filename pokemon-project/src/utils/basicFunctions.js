@@ -47,9 +47,15 @@ export function firstCharUpperCase(element) {
     return finalResult
 }
 
-export function getFormatedOrder (number) {
+export function getFormatedOrder(number) {
     if (number <= 9999) {
         number = ("000" + number).slice(-3);
     }
     return `N.º${number}`;
+}
+
+export function getMainAbility(abilities) {
+    if (abilities) {
+        return firstCharUpperCase(abilities[0].ability?.name) || '';
+    }
 }

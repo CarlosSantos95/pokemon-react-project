@@ -3,7 +3,7 @@ import PokemonLoader from './PokemonLoader';
 import PokemonTypesContainer from './PokemonTypesContainer';
 // import { useNavigate } from 'react-router-dom';
 import styles from '../styles/PokemonInfo.module.scss';
-import { getTypeColor, firstCharUpperCase } from '../utils/basicFunctions';
+import { getMainAbility } from '../utils/basicFunctions';
 const PokemonInfo = () => {
     // get store data
     const { currentPokemon } = useSelector(state => state.pokemons);
@@ -57,7 +57,7 @@ const PokemonInfo = () => {
                                         </div>
                                         <div className={`${styles.displayGrid}`}>
                                             <span>Habilidad</span>
-                                            <span>DATA 2</span>
+                                            <span>{getMainAbility(currentPokemon.abilities)}</span>
                                         </div>
                                     </div>
                                 </div>
