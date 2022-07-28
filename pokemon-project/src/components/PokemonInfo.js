@@ -3,7 +3,7 @@ import PokemonLoader from './PokemonLoader';
 import PokemonTypesContainer from './PokemonTypesContainer';
 // import { useNavigate } from 'react-router-dom';
 import styles from '../styles/PokemonInfo.module.scss';
-import { getMainAbility } from '../utils/basicFunctions';
+import { getMainAbility, firstCharUpperCase, getWeightOrHeight } from '../utils/basicFunctions';
 const PokemonInfo = () => {
     // get store data
     const { currentPokemon } = useSelector(state => state.pokemons);
@@ -39,11 +39,11 @@ const PokemonInfo = () => {
                                     <div className="col-6">
                                         <div className={`${styles.displayGrid}`}>
                                             <span>Altura</span>
-                                            <span>DATA 1</span>
+                                            <span>{getWeightOrHeight(currentPokemon, 'height')}</span>
                                         </div>
                                         <div className={`${styles.displayGrid}`}>
                                             <span>Peso</span>
-                                            <span>DATA 2</span>
+                                            <span>{getWeightOrHeight(currentPokemon, 'weight')}</span>
                                         </div>
                                         <div className={`${styles.displayGrid}`}>
                                             <span>Sexo</span>

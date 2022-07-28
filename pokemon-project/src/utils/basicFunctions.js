@@ -59,3 +59,13 @@ export function getMainAbility(abilities) {
         return firstCharUpperCase(abilities[0].ability?.name) || '';
     }
 }
+
+export function getWeightOrHeight(pokemon, type) {
+    let finalResult = '';
+    if (type === 'height') {
+        finalResult = `${(pokemon.height / 10)} m`
+    } else if ( type === 'weight') {
+        finalResult = `${(pokemon.weight / 10)} kg`
+    }
+    return finalResult
+}
